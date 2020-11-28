@@ -1,24 +1,27 @@
-import { init, h, thunk } from 'snabbdom'
-// 使用 init() 函数创建 patch()
-// init() 的参数是数组，将来可以传入模块，处理属性/样式/事件等
+import {h, init} from 'snabbdom'
+// 1. hello World
+
+// 参数： 数组，模块
+// 返回值： patch函数，作用：对比两个vnode（就是虚拟DOM）的差异，再更新到真实DOM
 let patch = init([])
-// 使用 h() 函数创建 vnode
-let vnode = h('div.cls', [
- h('h1', 'Hello Snabbdom'),
- h('p', '这是段落')
-])
-const app = document.querySelector('#app')
-// 把 vnode 渲染到空的 DOM 元素（替换）
-// 会返回新的 vnode
-let oldVnode = patch(app, vnode)
-setTimeout(() => {
-     vnode = h('div.cls', [
-      h('h1', 'Hello World'),
-      h('p', '这是段落')
-    ])
-     // 把老的视图更新到新的状态
-     oldVnode = patch(oldVnode, vnode)
-     // 卸载 DOM，文档中 patch(oldVnode, null) 有误
-     // h('!') 是创建注释
-     patch(oldVnode, h('!'))
-}, 2000)
+
+// 第一个参数： 标签+选择器
+// 第二个参数： 如果是字符串的话就是标签中的内容
+let vnode = h('div#container.cls', 'Hello World')
+
+// 获取页面中占位的Dom
+let app = document.querySelector('#app')
+
+/**
+ * @patch 函数
+ * 第一个参数： 可以是vnode（虚拟dom），也可以是 DOM 元素，内部会把DOM元素转换成vnode
+ * 第二个参数： vnode
+ * 返回值： vnode
+ */
+
+ let oldVnode = patch(app, vnode)
+
+ vnode = h('div', 'Hello Snabbdom')
+ patch(oldVnode, vnode)
+// 2. div中防止子元素h1,p
+
