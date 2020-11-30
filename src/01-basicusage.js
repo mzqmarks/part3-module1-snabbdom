@@ -23,5 +23,5 @@ let app = document.querySelector('#app')
 
  vnode = h('div', 'Hello Snabbdom')
  patch(oldVnode, vnode)
-// 2. div中防止子元素h1,p
+
 
