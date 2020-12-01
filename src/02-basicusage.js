@@ -11,3 +11,10 @@ let vnode = h('div#container',[
 let app = document.querySelector('#app')
 // 4. 对比虚拟dom 渲染页面
 patch(app,vnode)
+setTimeout(() => {
+    let newVnode = h('div#demo',[
+        h('h1','Hello World'),
+        h('p','hello p')
+    ])
+    patch(vnode, newVnode)
+},2000)
